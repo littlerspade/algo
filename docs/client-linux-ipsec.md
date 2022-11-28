@@ -13,6 +13,13 @@ Install strongSwan, then copy the included ipsec_user.conf, ipsec_user.secrets, 
 7. `sudo ipsec restart`: pick up config changes
 8. `sudo ipsec up <conn-name>`: start the ipsec tunnel
 9. `sudo ipsec down <conn-name>`: shutdown the ipsec tunnel
+10. https://github.com/trailofbits/algo/issues/1758#issuecomment-608678502 work-around found.. created a file /etc/strongswan/strongswan.d/libstrongswan-relax-constraints.conf with the following contents:
+
+libstrongswan {
+  x509 {
+    enforce_critical = no
+  }
+}
 
 One common use case is to let your server access your local LAN without going through the VPN. Set up a passthrough connection by adding the following to `/etc/ipsec.conf`:
 
